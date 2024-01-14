@@ -6,7 +6,7 @@ import jakeAvatar from '../../assets/jake-avatar.png';
 
 import styles from './Comment.module.css';
 
-export const Comment = () => {
+export const Comment = ({ comment }) => {
   return (
     <div className={styles.comment}>
       <Avatar
@@ -26,7 +26,7 @@ export const Comment = () => {
             </button>
           </header>
 
-          <p>Great! 👏👏</p>
+          <p>{comment.content}</p>
         </div>
 
         <footer>

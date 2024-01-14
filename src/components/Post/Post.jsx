@@ -1,3 +1,5 @@
+import { useState } from 'react';
+
 import { format, formatDistanceToNow } from 'date-fns';
 import en from 'date-fns/locale/en-US';
 
@@ -7,6 +9,9 @@ import { Comment } from '../Comment';
 import styles from './Post.module.css';
 
 export const Post = ({ author, content, publishedAt }) => {
+  const [comments, setComments] = useState([]);
+  const [newCommentText, setNewCommentText] = useState();
+
   const publishedDateFormatted = format(publishedAt, "d 'de' LLLL 'at' HH:mm'h'", {
     locale: en,
   });
@@ -18,10 +23,24 @@ export const Post = ({ author, content, publishedAt }) => {
 
   const getContent = (line) => {
     if (line.type === 'paragraph') {
-      return <p>{line.content}</p>;
+      return <p key={line.content}>{line.content}</p>;
     }
 
-    return <p><a href="#">{line.content}</a></p>;
+    return <p key={line.content}><a href="#">{line.content}</a></p>;
+  }
+
+  const handleCreateNewComment = () => {
+    event.preventDefault()
+
+    setComments([...comments, {
+      content: newCommentText,
+      id: comments.length + 1,
+    }]);
+    setNewCommentText('');
+  }
+
+  const handleNewCommentChange= () => {
+    setNewCommentText(event.target.value);
   }
 
   return (
@@ -44,11 +63,14 @@ export const Post = ({ author, content, publishedAt }) => {
         {content.map(line => getContent(line))}
       </div>
 
-      <form className={styles.commentForm}>
+      <form className={styles.commentForm} onSubmit={handleCreateNewComment}>
         <strong>Leave a comment</strong>
 
         <textarea
+          name="comment"
+          onChange={handleNewCommentChange}
           placeholder="Write here..."
+          value={newCommentText}
         />
 
         <footer>
@@ -57,7 +79,7 @@ export const Post = ({ author, content, publishedAt }) => {
       </form>
 
       <div className={styles.commentList}>
-        <Comment />
+        {comments.map(comment => <Comment comment={comment} key={comment.id} />)}
       </div>
     </article>
   );
