@@ -10,7 +10,7 @@ import styles from './Post.module.css';
 
 export const Post = ({ author, content, publishedAt }) => {
   const [comments, setComments] = useState([]);
-  const [newCommentText, setNewCommentText] = useState();
+  const [newCommentText, setNewCommentText] = useState('');
 
   const publishedDateFormatted = format(publishedAt, "d 'de' LLLL 'at' HH:mm'h'", {
     locale: en,
@@ -40,7 +40,12 @@ export const Post = ({ author, content, publishedAt }) => {
   }
 
   const handleNewCommentChange= () => {
+    event.target.setCustomValidity('');
     setNewCommentText(event.target.value);
+  }
+
+  const handleNewCommentInvalid = () => {
+    event.target.setCustomValidity('This is a required field');
   }
 
   const onDeleteComment = (commentId) => {
@@ -50,6 +55,8 @@ export const Post = ({ author, content, publishedAt }) => {
 
     setComments(commentsWithoutDeletedOne);
   }
+
+  const isNewCommentEmpty = newCommentText.length === 0;
 
   return (
     <article className={styles.post}>
@@ -77,12 +84,14 @@ export const Post = ({ author, content, publishedAt }) => {
         <textarea
           name="comment"
           onChange={handleNewCommentChange}
+          onInvalid={handleNewCommentInvalid}
           placeholder="Write here..."
+          required
           value={newCommentText}
         />
 
         <footer>
-          <button type="submit">Publish</button>
+          <button disabled={isNewCommentEmpty} type="submit">Publish</button>
         </footer>
       </form>
 
