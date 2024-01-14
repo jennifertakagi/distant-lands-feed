@@ -1,6 +1,7 @@
-import jakeAvatar from '../../assets/jake-avatar.png';
-
+import { Avatar } from '../Avatar';
 import { Comment } from '../Comment';
+
+import jakeAvatar from '../../assets/jake-avatar.png';
 
 import styles from './Post.module.css';
 
@@ -8,13 +9,13 @@ export const Post = () => {
   return (
     <article className={styles.post}>
       <header>
-        <div className={styles.author}>
-          <img className={styles.avatar} src={jakeAvatar} />
-          <div className={styles.authorInfo}>
-            <strong>Jake, the dog</strong>
-            <span>Magic Dog</span>
-          </div>
-        </div>
+        <Avatar
+          hasBorder
+          image={jakeAvatar}
+          isInline
+          name="Jake, the dog"
+          role="Magic Dog"
+        />
 
         <time title="January, 14th at 02:00pm" dateTime="2024-01-14 02:00:00">Published 1 hour ago</time>
       </header>

@@ -1,5 +1,7 @@
 import { PencilLine } from 'phosphor-react'
 
+import { Avatar } from '../Avatar';
+
 import jakeAvatar from '../../assets/jake-avatar.png';
 
 import styles from './Sidebar.module.css';
@@ -12,11 +14,12 @@ export const Sidebar = () => {
         src="https://images.unsplash.com/photo-1660836521245-cdb2156050e9?w=400&auto=format&fit=crop&q=50"
       />
 
-      <div className={styles.profile}>
-        <img className={styles.avatar} src={jakeAvatar} />
-        <strong>Jake, the dog</strong>
-        <span>Magic Dog</span>
-      </div>
+      <Avatar
+        hasBorder
+        image={jakeAvatar}
+        name="Jake, the dog"
+        role="Magic Dog"
+      />
 
       <footer>
         <button>
