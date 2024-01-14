@@ -1,0 +1,21 @@
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-7);
+  padding: 1.25rem 0;
+
+  background: var(--gray-200);
+}
+
+.header img {
+  height: 2rem;
+}
+
+.header p {
+  color: var(--white-200, #EDEBD7);
+  font-size: 25px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 160%;
+}
