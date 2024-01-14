@@ -25,6 +25,18 @@ export const Post = () => {
           <a href="">#brunch-time</a>{' '}
         </p>
       </div>
+
+      <form className={styles.commentForm}>
+        <strong>Leave a comment</strong>
+
+        <textarea
+          placeholder="Write here..."
+        />
+
+        <footer>
+          <button type="submit">Publish</button>
+        </footer>
+      </form>
     </article>
   );
 }
