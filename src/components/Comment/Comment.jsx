@@ -6,7 +6,11 @@ import jakeAvatar from '../../assets/jake-avatar.png';
 
 import styles from './Comment.module.css';
 
-export const Comment = ({ comment }) => {
+export const Comment = ({ comment, onDeleteComment }) => {
+  const handleDeleteComment = () => {
+    onDeleteComment(comment.id);
+  }
+
   return (
     <div className={styles.comment}>
       <Avatar
@@ -21,7 +25,7 @@ export const Comment = ({ comment }) => {
               <time title="11 de Maio às 08:13h" dateTime="2022-05-11 08:13:00">About 1 hour ago</time>
             </div>
 
-            <button title="Delete comment">
+            <button onClick={handleDeleteComment} title="Delete comment">
               <Trash size={24} />
             </button>
           </header>
