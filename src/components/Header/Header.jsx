@@ -1,12 +1,12 @@
 import styles from './Header.module.css';
 
-import socialMediaLogo from '../../assets/social-feed-logo.png';
+import distantLandsFeedLogo from '../../assets/distant-lands-feed-logo.png';
 
 export const Header = () => {
   return (
     <header className={styles.header}>
-      <img src={socialMediaLogo} alt="Social Feed" />
-      <p>Social Feed</p>
+      <img src={distantLandsFeedLogo} alt="Distant Lands Feed logo" />
+      <p>Distant Lands Feed</p>
     </header>
   );
 }
