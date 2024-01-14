@@ -1,2 +1,2 @@
-# [WIP] Social Feed 💭
-Navigate and discover what's your friends are doing!
+# [WIP] Distant Lands Feed 🎈
+Navigate and discover what's happening in Distant Lands!
