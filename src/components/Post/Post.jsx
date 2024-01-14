@@ -1,5 +1,7 @@
 import jakeAvatar from '../../assets/jake-avatar.png';
 
+import { Comment } from '../Comment';
+
 import styles from './Post.module.css';
 
 export const Post = () => {
@@ -37,6 +39,12 @@ export const Post = () => {
           <button type="submit">Publish</button>
         </footer>
       </form>
+
+      <div className={styles.commentList}>
+        <Comment />
+        <Comment />
+        <Comment />
+      </div>
     </article>
   );
 }
