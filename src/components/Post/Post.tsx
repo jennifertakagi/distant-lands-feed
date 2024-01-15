@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { ChangeEvent, FormEvent, InvalidEvent, useState } from 'react';
 
 import { format, formatDistanceToNow } from 'date-fns';
 import en from 'date-fns/locale/en-US';
@@ -7,10 +7,22 @@ import { Avatar } from '../Avatar';
 import { Comment } from '../Comment';
 
 import styles from './Post.module.css';
+import { IContent, IPost } from '../../data/posts';
 
-export const Post = ({ author, content, publishedAt }) => {
-  const [comments, setComments] = useState([]);
+interface PostProps {
+  post: IPost;
+}
+
+interface Comment {
+  id: number;
+  content: string;
+}
+
+export const Post = ({ post }: PostProps) => {
+  const [comments, setComments] = useState<Comment[]>([]);
   const [newCommentText, setNewCommentText] = useState('');
+
+  const { author, content, publishedAt, } = post;
 
   const publishedDateFormatted = format(publishedAt, "d 'de' LLLL 'at' HH:mm'h'", {
     locale: en,
@@ -21,7 +33,7 @@ export const Post = ({ author, content, publishedAt }) => {
     addSuffix: true
   });
 
-  const getContent = (line) => {
+  const getContent = (line: IContent) => {
     if (line.type === 'paragraph') {
       return <p key={line.content}>{line.content}</p>;
     }
@@ -29,7 +41,7 @@ export const Post = ({ author, content, publishedAt }) => {
     return <p key={line.content}><a href="#">{line.content}</a></p>;
   }
 
-  const handleCreateNewComment = () => {
+  const handleCreateNewComment = (event: FormEvent) => {
     event.preventDefault()
 
     setComments([...comments, {
@@ -39,16 +51,16 @@ export const Post = ({ author, content, publishedAt }) => {
     setNewCommentText('');
   }
 
-  const handleNewCommentChange= () => {
+  const handleNewCommentChange= (event: ChangeEvent<HTMLTextAreaElement>) => {
     event.target.setCustomValidity('');
     setNewCommentText(event.target.value);
   }
 
-  const handleNewCommentInvalid = () => {
+  const handleNewCommentInvalid = (event: InvalidEvent<HTMLTextAreaElement>) => {
     event.target.setCustomValidity('This is a required field');
   }
 
-  const onDeleteComment = (commentId) => {
+  const onDeleteComment = (commentId: number) => {
     const commentsWithoutDeletedOne = comments.filter(comment => {
       return comment.id !== commentId;
     })

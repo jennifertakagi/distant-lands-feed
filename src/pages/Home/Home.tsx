@@ -18,10 +18,8 @@ export const Home = () => {
         <main>
           {posts.map(post =>
             <Post
-              author={post.author}
-              content={post.content}
+              post={post}
               key={post.id}
-              publishedAt={post.publishedAt}
             />
           )}
         </main>

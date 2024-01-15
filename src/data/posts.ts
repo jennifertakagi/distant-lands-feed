@@ -1,7 +1,25 @@
 import finnAvatar from '../assets/finn-avatar.png';
 import jakeAvatar from '../assets/jake-avatar.png';
 
-export const posts = [
+interface IAuthor {
+  name: string;
+  role: string;
+  avatarUrl: string;
+}
+
+export interface IContent {
+  type: 'paragraph' | 'link' | 'tags';
+  content: string;
+}
+
+export interface IPost {
+  author: IAuthor;
+  id: number;
+  publishedAt: Date;
+  content: IContent[];
+}
+
+export const posts: IPost[] = [
   {
     id: 1,
     author: {

@@ -8,7 +8,15 @@ import jakeAvatar from '../../assets/jake-avatar.png';
 
 import styles from './Comment.module.css';
 
-export const Comment = ({ comment, onDeleteComment }) => {
+interface CommentProps {
+  comment: {
+    id: number;
+    content: string;
+  };
+  onDeleteComment: (commentId: number) => void;
+}
+
+export const Comment = ({ comment, onDeleteComment }: CommentProps) => {
   const [likeCount, setLikeCount] = useState(0);
 
   const handleDeleteComment = () => {
